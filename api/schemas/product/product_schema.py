@@ -1,0 +1,12 @@
+product_schema = {
+    "type": "object",
+    "properties": {
+        "id": {"type": "integer"},
+        "title": {"type": "string"},
+        "price": {"type": "number"},
+        "description": {"type": "string"},
+        "category": {"type": "string"},
+        "image": {"type": "string", "format": "url"}
+    },
+    "required": ["id", "price"]
+}
