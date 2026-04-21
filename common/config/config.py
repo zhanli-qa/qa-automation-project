@@ -1,6 +1,17 @@
+import os
 
+"""
+config Environments:Dev & Staging
+"""
 class config:
 
-    Base_URL = "https://fakestoreapi.com"
-    TIMEOUT = 5
+    ENV = os.getenv("ENV", "dev")
 
+    Base_URLS = {
+        "dev": "https://fakestoreapi.com",
+        "staging": "https://staging.fakestoreapi.com"
+    }
+
+    Base_URL = Base_URLS[ENV]
+
+    TIMEOUT = 10

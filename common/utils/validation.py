@@ -9,3 +9,5 @@ def validate_response_status_code(response, expect_status_code=200):
 def validate_schema(data, schema):
 
     validate(instance=data, schema=schema)
+
+
