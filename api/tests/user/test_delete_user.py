@@ -5,7 +5,7 @@ from api.schemas.user.user_schema import user_schema
 from api.schemas.user.user_list_schema import user_list_schema
 
 '''
-Test get all users
+Verify all users can be retrieved successfully
 Return 200 with Json format, the value of Json including id and username
 '''
 def test_get_all_users(auth_client):
@@ -50,7 +50,7 @@ Return 201 with id
 '''
 def test_add_a_new_user(auth_client):
 
-    with open('test_data/api/user.json', 'r') as file:
+    with open('test_data/api/add_new_user.json', 'r') as file:
         payload = json.load(file)
 
     # 1, sent request

@@ -1,27 +1,46 @@
 import pytest
 from api.client.api_client import APIClient
+from api.services.user_service import UserService
 
-# api_client without Token
+
 @pytest.fixture
 def api_client():
-
+    """
+    Create a basic API client without authentication
+    """
     return APIClient()
 
 
-# api_client with Token
 @pytest.fixture
 def auth_client(api_client):
-    api_client.login("mor_2314", "83r5^_")
+    """
+    Create an authenticated API client
+    """
+    client = APIClient()
+    token = client.login("mor_2314", "83r5^_")
+    client.set_headers({"Authorization": f"Bearer {token}"})
+    return client
 
-    return api_client
+
+@pytest.fixture
+def user_service(auth_client):
+    """
+    User service with authenticated client
+    """
+    return UserService(auth_client)
 
 
-# api_client with invalid Token
 @pytest.fixture
 def invalid_token_client(api_client):
-    api_client.set_headers({
+    """
+    Create an API client with invalid token
+    """
+    client = APIClient()
+
+    client.set_headers({
         "Authorization": "Bearer invalid_token"
     })
-    return api_client
+    return client
+
 
 

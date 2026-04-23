@@ -42,16 +42,19 @@ class APIClient:
 
         logger.info(f"Login response status: {response.status_code}")
 
-        if response.ok:
-            token = response.json().get("token")
-            if token:
-                self.set_headers({"Authorization": f"Bearer {token}"})
-                logger.warning("Login succeeded but no token found in response")
-                logger.info(f"Current headers after login: {self.headers}")
-            else:
-                logger.warning("Login failed, Authorization header not set")
+        if not response.ok:
+            logger.warning("Login failed")
+            raise Exception(f"Login failed with status  code {response.status_code}")
 
-        return response
+        data = response.json()
+        token = data.get("token")
+
+        if not token:
+            logger.warning("Login succeeded but no token found in response")
+            raise Exception("Token not found in login response")
+
+        logger.info("Login succeeded and token received")
+        return token
 
     """
     Initialize the API client with GET method.
@@ -60,8 +63,10 @@ class APIClient:
 
         url = f"{self.base_url}{endpoint}"
         logger.info(f"GET {url}")
+        logger.info(f"Headers: {self.headers}")
 
         response = requests.get(url, headers=self.headers, timeout=config.TIMEOUT)
+        logger.info(f"Response Status: {response.status_code}")
 
         return response
 
@@ -72,11 +77,12 @@ class APIClient:
 
         url = f"{self.base_url}{endpoint}"
         logger.info(f"POST {url} | data={data}")
+        logger.info(f"Headers: {self.headers}")
 
         response = requests.post(url, json=data, headers=self.headers, timeout=config.TIMEOUT)
+        logger.info(f"Response Status: {response.status_code}")
 
         # equals to print(data), if use print, the cmd need to use -s
-        # in order to present INFO log, the cmd command "pytest api/tests/test_user.py -o log_cli=true --log-cli-level=INFO"
         try:
             logger.info(f"Response data: {response.json()}")
         except Exception:
@@ -91,8 +97,10 @@ class APIClient:
 
         url = f"{self.base_url}{endpoint}"
         logger.info(f"PUT {url} | data={data}")
+        logger.info(f"Headers: {self.headers}")
 
         response = requests.put(url, json=data, headers=self.headers, timeout=config.TIMEOUT)
+        logger.info(f"Response Status: {response.status_code}")
 
         return response
 
@@ -104,8 +112,10 @@ class APIClient:
 
         url = f"{self.base_url}{endpoint}"
         logger.info(f"DELETE {url}")
+        logger.info(f"Headers: {self.headers}")
 
         response = requests.delete(url, headers=self.headers, timeout=config.TIMEOUT)
+        logger.info(f"Response Status: {response.status_code}")
 
         return response
 
