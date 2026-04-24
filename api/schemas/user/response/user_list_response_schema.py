@@ -1,4 +1,4 @@
-user_list_schema = {
+user_list_response_schema = {
     "type": "array",
     "properties": {
         "id": {"type": "integer"},

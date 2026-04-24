@@ -1,7 +1,10 @@
 import pytest
 import json
-from common.utils.validation import validate_response_status_code
+from common.utils.validation import validate_response_is_json
 from common.logger.logger import get_logger
+from common.utils.validation import validate_response_status_code, validate_schema, validate_key_is_exist
+from api.schemas.user.request.create_user_request_schema import create_user_request_schema
+from api.schemas.user.response.create_user_response_schema import create_user_response_schema
 
 logger = get_logger()
 
@@ -16,17 +19,22 @@ def test_add_a_new_user(user_service):
 
     # 1, sent request
     response = user_service.create_user(payload)
+    # validate request payload schema
+    validate_schema(payload, create_user_request_schema)
 
     # 2, check the status code of response
     logger.info(f"Status Code: {response.status_code}")
     validate_response_status_code(response, 201)
 
-    # 3, decoded the content of return
-    data = response.json()
+    # 3, Validate response is JSON
+    data = validate_response_is_json(response)
     logger.info(f"Response JSON: {data}")
 
     # 4, assert the value
-    assert "id" in data
+    validate_key_is_exist(data, "id")
+
+    # 5, assert the response schema
+    validate_schema(data, create_user_response_schema)
 
 
 '''

@@ -21,3 +21,16 @@ class UserService:
         """
         return self.client.post("/users", payload)
 
+    def update_user(self, payload, user_id):
+        """
+        Update an existing user
+        """
+        return self.client.put(f"/users/{user_id}", payload)
+
+
+    def delete_user(self, user_id):
+        """
+        Delete an existing user
+        """
+        return self.client.delete(f"/users/{user_id}")
+

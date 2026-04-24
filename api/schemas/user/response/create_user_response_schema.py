@@ -1,4 +1,4 @@
-user_schema = {
+create_user_response_schema = {
   "type": "object",
   "properties": {
     "id": {"type": "integer"},
