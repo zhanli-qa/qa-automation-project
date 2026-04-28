@@ -1,10 +1,6 @@
+from api.schemas.user.response.user_response_schema import user_response_schema
+
 user_list_response_schema = {
     "type": "array",
-    "properties": {
-        "id": {"type": "integer"},
-        "username": {"type": "string"},
-        "email": {"type": "string"},
-        "password": {"type": "string"}
-      },
-    "required": ["id"]
+    "items": user_response_schema
 }

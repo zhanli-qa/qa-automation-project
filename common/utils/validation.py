@@ -10,7 +10,7 @@ def validate_response_status_code(response, expect_status_code=200):
 def validate_response_is_json(response):
     try:
         return response.json()
-    except ValidationError:
+    except ValueError:
         raise AssertionError(f"Response is not valid JSON. Response text: {response.text}")
 
 # validate response type
@@ -43,7 +43,7 @@ def validate_keys_exist(data, keys):
 
 
 # validate multiple keys exist
-def validat_list_not_empty(data):
+def validate_list_not_empty(data):
     validate_response_is_list(data)
     assert len(data) > 0, f"Expected list not empty, but got empty list"
 

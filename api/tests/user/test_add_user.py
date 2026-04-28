@@ -49,8 +49,8 @@ def test_add_a_new_user(user_service):
 '''
 Negative Test -- missing fields when add new user
 Return 400 error code 
-@allure.feature("User API")
 '''
+@allure.feature("User API")
 @allure.story("Create User - Negative Cases")
 @pytest.mark.skip(reason="temporarily skip")
 def test_add_user_missing_fields_return_400(auth_client):
@@ -80,7 +80,7 @@ Return 401/403 error code
 @allure.feature("User API")
 @allure.story("Create User - Negative Cases")
 @pytest.mark.skip(reason="temporarily skip")
-def test_add_user_missing_token(invalid_token_client):
+def test_add_user_invalid_token(invalid_token_client):
 
     with allure.step("Step 1: Generate a request payload"):
         payload = {

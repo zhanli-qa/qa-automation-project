@@ -52,6 +52,7 @@ def test_update_user(user_service):
 Negative Test -- update a non-exist user
 Return 404 error code 
 '''
+@allure.feature("User API")
 @allure.story("Update User - Negative Cases")
 @pytest.mark.skip(reason="temporarily skip")
 def test_update_non_exit_user(user_service):
@@ -68,7 +69,7 @@ def test_update_non_exit_user(user_service):
         response = user_service.update_user(payload, user_id)
 
     # attach response to allure report for debugging purpose
-    attache_response(response)
+    attach_response(response)
 
     with allure.step("Validate status code"):
         validate_response_status_code(response, 404)

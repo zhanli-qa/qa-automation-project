@@ -2,7 +2,7 @@ import allure
 import pytest
 from common.utils.validation import (validate_response_status_code, validate_schema, validate_response_is_list,
                                      validate_response_is_dict, validate_key_is_exist, validate_response_is_json,
-                                     validat_list_not_empty, validate_keys_exist)
+                                     validate_list_not_empty, validate_keys_exist)
 from api.schemas.user.response.user_response_schema import user_response_schema
 from api.schemas.user.response.user_list_response_schema import user_list_response_schema
 from jsonschema.validators import validate
@@ -40,7 +40,7 @@ def test_get_all_users(user_service):
         validate_response_is_list(data)
 
     with allure.step("Step 6: Validate response is not empty"):
-        validat_list_not_empty(data)
+        validate_list_not_empty(data)
 
     with allure.step("Step 7: Validate fields id and username in response"):
         validate_key_is_exist(data[0], "id")
