@@ -33,6 +33,15 @@ test_data/
 - Logging support
 - Scalable test structure
 
+
+## Run Tests
+
+pytest --alluredir=reports/ --clean-alluredir
+
+## View Report
+
+allure serve reports/
+
 ---
 
 ## How to Run
@@ -40,3 +49,4 @@ test_data/
 ```bash
 pip install -r requirements.txt
 pytest
+

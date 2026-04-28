@@ -57,6 +57,23 @@ class APIClient:
         return token
 
     """
+    Initialize the login itself 
+    """
+    def login_response(self, username, password):
+
+        url = f"{self.base_url}/auth/login"
+
+        payload = {
+            "username": username,
+            "password": password
+        }
+
+        response = requests.post(url, json=payload, timeout=config.TIMEOUT)
+
+        return response
+
+
+    """
     Initialize the API client with GET method.
     """
     def get(self, endpoint):
