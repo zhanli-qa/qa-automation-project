@@ -1,8 +1,31 @@
+# Virtual environments
 .venv/
 venv/
+env/
+
+# Python cache
 __pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Pytest
 .pytest_cache/
+
+# IDE
 .idea/
+.vscode/
+
+# Logs
 *.log
+
+# Allure reports (generated files)
 reports/
+allure-results/
+
+# Environment variables
 .env
+
+# OS files
+.DS_Store
+Thumbs.db
