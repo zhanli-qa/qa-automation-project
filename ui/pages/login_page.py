@@ -1,4 +1,5 @@
 from common.config.config import config
+from ui.pages.inventory_page import InventoryPage
 class LoginPage:
 
     def __init__(self, page):
@@ -15,4 +16,9 @@ class LoginPage:
         self.username_input.fill(username)
         self.password_input.fill(password)
         self.login_button.click()
+        return InventoryPage(self.page)
+
+    def screenshot(self):
+        return self.page.screenshot(full_page=True)
+
 
