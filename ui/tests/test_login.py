@@ -14,11 +14,8 @@ def test_login_success(login_page):
             VALID_USER["password"]
         )
 
-    allure.attach(
-        login_page.screenshot(),
-        name="after_success_login",
-        attachment_type=allure.attachment_type.PNG
-    )
+        # allure attach which has already defined in base_page and inherited by login_page
+        login_page.screenshot("after_success_login")
 
     with allure.step("Verify login success and redirect to inventory page"):
         expect(inventory_page.title).to_have_text("Products")
@@ -35,11 +32,7 @@ def test_login_failed_with_invalid_username(login_page):
             INVALID_USER_NAME["password"]
         )
 
-    allure.attach(
-        login_page.screenshot(),
-        name="invalid_username_error_message",
-        attachment_type=allure.attachment_type.PNG
-    )
+        login_page.screenshot("invalid_username_error_message")
 
     with allure.step("Verify error message is displayed"):
         expect(login_page.error_message).to_be_visible()
@@ -59,11 +52,7 @@ def test_login_failed_with_invalid_password(login_page):
             INVALID_USER_PASSWORD["password"]
         )
 
-    allure.attach(
-        login_page.screenshot(),
-        name="invalid_password_error_message",
-        attachment_type=allure.attachment_type.PNG
-    )
+        login_page.screenshot("invalid_password_error_message")
 
     with allure.step("Verify error message is displayed"):
         expect(login_page.error_message).to_be_visible()
@@ -83,11 +72,7 @@ def test_login_failed_with_empty_password(login_page):
             EMPTY_USER_PASSWORD["password"]
         )
 
-    allure.attach(
-        login_page.screenshot(),
-        name="empty_password_error_message",
-        attachment_type=allure.attachment_type.PNG
-    )
+        login_page.screenshot("empty_password_error_message")
 
     with allure.step("Verify error message is displayed"):
         expect(login_page.error_message).to_be_visible()
@@ -105,11 +90,7 @@ def test_login_failed_with_empty_username(login_page):
             EMPTY_USER_USERNAME["password"]
         )
 
-    allure.attach(
-        login_page.screenshot(),
-        name="empty_username_error_message",
-        attachment_type=allure.attachment_type.PNG
-    )
+        login_page.screenshot("empty_username_error_message")
 
     with allure.step("Verify error message is displayed"):
         expect(login_page.error_message).to_be_visible()
