@@ -2,6 +2,9 @@ import pytest
 import allure
 from ui.pages.login_page import LoginPage
 from test_data.ui.login_user import VALID_USER
+from ui.pages.cart_page import CartPage
+from ui.pages.checkout_page import CheckoutPage
+from ui.pages.checkout_overview_page import CheckoutOverviewPage
 
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item):
@@ -45,6 +48,30 @@ def inventory_page(login_page):
     )
 
     return inventory_page
+
+# Fixture cart page
+@pytest.fixture
+def cart_page(inventory_page):
+    """
+    cart page depends on inventory page
+    """
+    return CartPage(inventory_page.page)
+
+
+@pytest.fixture
+def checkout_page(cart_page):
+    """
+    checkout page depends on cart_page
+    """
+    return CheckoutPage(cart_page.page)
+
+
+@pytest.fixture
+def checkout_overview_page(checkout_page):
+    """
+    checkout overview page depends on checkout_page
+    """
+    return CheckoutOverviewPage(checkout_page.page)
 
 
 
