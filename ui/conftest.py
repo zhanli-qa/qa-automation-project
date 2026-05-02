@@ -5,6 +5,7 @@ from test_data.ui.login_user import VALID_USER
 from ui.pages.cart_page import CartPage
 from ui.pages.checkout_page import CheckoutPage
 from ui.pages.checkout_overview_page import CheckoutOverviewPage
+from ui.pages.checkout_complete_page import CheckoutCompletePage
 
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item):
@@ -69,9 +70,17 @@ def checkout_page(cart_page):
 @pytest.fixture
 def checkout_overview_page(checkout_page):
     """
-    checkout overview page depends on checkout_page
+    checkout overview page depends on checkout page
     """
     return CheckoutOverviewPage(checkout_page.page)
+
+
+@pytest.fixture
+def checkout_complete_page(checkout_overview_page):
+    """
+    checkout complete page depends on checkout overview page
+    """
+    return CheckoutCompletePage(checkout_overview_page.page)
 
 
 

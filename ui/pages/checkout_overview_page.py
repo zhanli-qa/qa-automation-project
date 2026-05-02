@@ -10,3 +10,6 @@ class CheckoutOverviewPage(BasePage):
         self.price_total_label = page.locator('[data-test="total-info-label"]')
         self.finish_button = page.get_by_role("button", name="Finish")
         self.cancel_button = page.get_by_role("button", name="Cancel")
+
+    def click_finish(self):
+        self.finish_button.click()
