@@ -1,4 +1,5 @@
 from ui.pages.base_page import BasePage
+from ui.pages.checkout_overview_page import CheckoutOverviewPage
 
 class CheckoutPage(BasePage):
     def __init__(self, page):
@@ -18,7 +19,7 @@ class CheckoutPage(BasePage):
         self.fill(self.lastname_input, lastname)
         self.fill(self.postcode_input, postcode)
         self.click(self.continue_button)
-        return CheckoutPage(self.page)
+        return CheckoutOverviewPage(self.page)
 
 
 

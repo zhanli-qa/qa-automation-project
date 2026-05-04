@@ -1,7 +1,10 @@
 import allure
+import pytest
 from playwright.sync_api import expect
 from test_data.ui.checkout import VALID_CHECKOUT_INFO, EMPTY_CHECKOUT_FIRSTNAME, EMPTY_CHECKOUT_LASTNAME
 from common.utils.allure_helper import attach_screenshot, attach_current_url
+
+pytestmark = pytest.mark.ui
 
 @allure.feature("Checkout UI")
 @allure.story("Checkout page displayed")
@@ -70,8 +73,8 @@ def test_checkout_successfully_continue(inventory_page, cart_page, checkout_page
         )
 
     with allure.step("Verify navigate to checkout overview page"):
+        expect(checkout_overview_page.payment_information_label).to_be_visible()
         expect(checkout_overview_page.shipping_information_label).to_be_visible()
-        expect(checkout_overview_page.price_total_label).to_be_visible()
         expect(checkout_overview_page.price_total_label).to_be_visible()
         expect(checkout_overview_page.cancel_button).to_be_visible()
         expect(checkout_overview_page.finish_button).to_be_visible()
@@ -122,7 +125,7 @@ def test_checkout_without_first_name(inventory_page, cart_page, checkout_page):
 
 @allure.feature("Checkout UI")
 @allure.story("Checkout without lastname show error message")
-def test_checkout_without_first_name(inventory_page, cart_page, checkout_page):
+def test_checkout_without_last_name(inventory_page, cart_page, checkout_page):
     """
     E2E flow: login → inventory page → add product → go to cart page → checkout
     → input valid lastname, postcode and empty lastname → error message

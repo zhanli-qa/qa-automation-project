@@ -15,7 +15,7 @@ class APIClient:
     (e.g., dev, staging, production).
     """
     def __init__(self):
-        self.base_url = config.API_BASE_URLS
+        self.base_url = config.API_BASE_URL
         self.headers = {"Content-Type": "application/json"}
 
     """

@@ -13,7 +13,7 @@ class config:
         "staging": "https://staging.fakestoreapi.com"
     }
 
-    API_BASE_URLS = API_BASE_URLS[ENV]
+    API_BASE_URL = API_BASE_URLS[ENV]
 
     # UI URLs
     UI_BASE_URLS = {

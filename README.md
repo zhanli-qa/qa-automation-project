@@ -5,8 +5,7 @@
 
 # QA Automation Project
 
-A scalable QA automation framework for API testing built with Python, Pytest, and Requests, with Allure reporting integration.
-
+A scalable end-to-end QA automation framework covering API testing, UI testing, and API + UI integration, built with Python, Pytest, Requests, Playwright, and Allure.
 ---
 
 ## 🚀 Tech Stack
@@ -141,11 +140,85 @@ Example strategy:
 
 In real enterprise projects, API-based login can also be used to obtain an authentication token and inject it into the browser context to skip repetitive UI login steps.
 
+## ⚙️ Test Configuration
 
-Run tests and generate report:
+This project uses `pytest.ini` to centralize test configuration and enable flexible test execution.
 
-    pytest --alluredir=reports/ --clean-alluredir
-    allure serve reports/
+```ini
+[pytest]
+testpaths =
+    api/tests
+    ui/tests
+
+addopts = -v --strict-markers
+
+markers =
+    api: API tests
+    ui: UI tests
+    smoke: Smoke tests
+    regression: Regression tests
+```
+
+This configuration allows:
+
+* Separation of API and UI tests
+* Selective test execution using markers
+* Better scalability and CI/CD integration
+
+---
+
+## 🚀 Run Tests and Generate Allure Report
+
+### Run all tests
+
+```bash
+pytest --alluredir=allure-results --clean-alluredir
+```
+
+### Run only API tests
+
+```bash
+pytest -m api --alluredir=allure-results --clean-alluredir
+```
+
+### Run only UI tests
+
+```bash
+pytest -m ui --alluredir=allure-results --clean-alluredir
+```
+
+---
+
+## 📊 View Allure Report
+
+### Generate and open report (recommended)
+
+```bash
+allure serve allure-results
+```
+
+### Generate report without rerunning tests
+
+```bash
+allure generate allure-results -o allure-report --clean
+allure open allure-report
+```
+
+---
+
+## 🧪 Test Strategy
+
+* **API Tests** → validate backend logic, schema, and error handling
+* **UI Tests** → validate user flows and UI behavior using Playwright
+* **Markers** → enable test categorization (`api`, `ui`, `smoke`, `regression`)
+* **Allure Reporting** → provide detailed execution steps, logs, and screenshots
+
+This setup is designed to support:
+
+* Smoke tests on every commit
+* Regression tests on scheduled runs
+* Scalable test execution in CI pipelines
+
 
 Report provides:
 
@@ -162,6 +235,10 @@ Install dependencies:
 
     pip install -r requirements.txt
 
-Run tests:
+## ⚡ One Command (Run + Report)
 
-    pytest
+```bash
+pytest --alluredir=allure-results --clean-alluredir && allure serve allure-results
+```
+
+---

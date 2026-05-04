@@ -1,8 +1,11 @@
 import allure
+import pytest
 from playwright.sync_api import expect
 from test_data.ui.login_user import (VALID_USER, INVALID_USER_NAME,
                                      INVALID_USER_PASSWORD, EMPTY_USER_PASSWORD, EMPTY_USER_USERNAME)
 from common.utils.allure_helper import attach_screenshot, attach_current_url
+
+pytestmark = pytest.mark.ui
 
 
 # Verify login success

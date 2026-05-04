@@ -10,6 +10,8 @@ from common.utils.allure_helper import attach_response, attach_request, attach_s
 
 logger = get_logger()
 
+pytestmark = pytest.mark.api
+
 '''
 Verify a new user can be created successfully
 '''
@@ -62,7 +64,7 @@ def test_add_user_missing_fields_return_400(auth_client):
         }
 
     with allure.step("Step 2: Send request"):
-        response = api_client.post("/users", payload)
+        response = auth_client.post("/users", payload)
 
     # attach request, response and status code to allure report for debugging purpose
     attach_request(payload)

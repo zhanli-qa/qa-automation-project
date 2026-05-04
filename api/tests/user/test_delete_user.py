@@ -1,9 +1,12 @@
 import allure
+import pytest
 from common.utils.validation import validate_response_status_code
 from common.utils.allure_helper import attach_response, attach_status_code
 from common.logger.logger import get_logger
 
 logger = get_logger()
+
+pytestmark = pytest.mark.api
 
 '''
 Verify delete a user successfully

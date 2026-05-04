@@ -2,8 +2,10 @@ from common.utils.validation import (validate_response_status_code, validate_res
                                      validate_key_is_exist)
 from common.logger.logger import get_logger
 import allure
+import pytest
 
 logger = get_logger()
+pytestmark = pytest.mark.api
 
 '''
 Test login function

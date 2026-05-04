@@ -1,6 +1,9 @@
 import allure
+import pytest
 from playwright.sync_api import expect
 from common.utils.allure_helper import attach_screenshot, attach_current_url
+
+pytestmark = pytest.mark.ui
 
 @allure.feature("Cart UI")
 @allure.story("Cart page display added product")

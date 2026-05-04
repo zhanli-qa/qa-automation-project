@@ -1,7 +1,10 @@
 import allure
+import pytest
 from playwright.sync_api import expect
 from test_data.ui.checkout import VALID_CHECKOUT_INFO
 from common.utils.allure_helper import attach_screenshot, attach_current_url
+
+pytestmark = pytest.mark.ui
 
 @allure.feature("Checkout complete UI")
 @allure.story("Checkout complete displayed")

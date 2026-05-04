@@ -10,6 +10,7 @@ from common.logger.logger import get_logger
 from common.utils.allure_helper import attach_response, attach_status_code
 
 logger = get_logger()
+pytestmark = pytest.mark.api
 
 '''
 Verify all users can be retrieved successfully
