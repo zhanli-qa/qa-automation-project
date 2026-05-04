@@ -1,6 +1,7 @@
 import allure
 from playwright.sync_api import expect
 from test_data.ui.checkout import VALID_CHECKOUT_INFO, EMPTY_CHECKOUT_FIRSTNAME, EMPTY_CHECKOUT_LASTNAME
+from common.utils.allure_helper import attach_screenshot, attach_current_url
 
 @allure.feature("Checkout UI")
 @allure.story("Checkout page displayed")
@@ -16,6 +17,10 @@ def test_checkout_page_displayed(inventory_page, cart_page, checkout_page):
     with allure.step("Go to cart page"):
         inventory_page.go_to_cart()
 
+    with allure.step("Capture cart page state"):
+        attach_current_url(cart_page)
+        attach_screenshot(cart_page, "cart_page_state")
+
     with allure.step("Click checkout button"):
         cart_page.click_checkout()
 
@@ -27,8 +32,9 @@ def test_checkout_page_displayed(inventory_page, cart_page, checkout_page):
         expect(checkout_page.continue_button).to_be_visible()
         expect(checkout_page.cart_icon).to_be_visible()
 
-        # allure attach
-        checkout_page.screenshot("checkout page displayed")
+    with allure.step("Capture checkout page state"):
+        attach_current_url(checkout_page)
+        attach_screenshot(checkout_page, "checkout_page_state")
 
 
 @allure.feature("Checkout UI")
@@ -45,8 +51,16 @@ def test_checkout_successfully_continue(inventory_page, cart_page, checkout_page
     with allure.step("Go to cart page"):
         inventory_page.go_to_cart()
 
+    with allure.step("Capture cart page state"):
+        attach_current_url(cart_page)
+        attach_screenshot(cart_page, "cart_page_state")
+
     with allure.step("Click checkout button"):
         cart_page.click_checkout()
+
+    with allure.step("Capture checkout page state"):
+        attach_current_url(checkout_page)
+        attach_screenshot(checkout_page, "checkout_page_state")
 
     with allure.step("Fill up checkout information"):
         checkout_page = checkout_page.checkout(
@@ -62,8 +76,9 @@ def test_checkout_successfully_continue(inventory_page, cart_page, checkout_page
         expect(checkout_overview_page.cancel_button).to_be_visible()
         expect(checkout_overview_page.finish_button).to_be_visible()
 
-        # allure attach
-        checkout_page.screenshot("error message when checkout without firstname")
+    with allure.step("Capture checkout overview page state"):
+        attach_current_url(checkout_overview_page)
+        attach_screenshot(checkout_overview_page, "checkout_overview_page_state")
 
 
 @allure.feature("Checkout UI")
@@ -80,6 +95,10 @@ def test_checkout_without_first_name(inventory_page, cart_page, checkout_page):
     with allure.step("Go to cart page"):
         inventory_page.go_to_cart()
 
+    with allure.step("Capture cart page state"):
+        attach_current_url(cart_page)
+        attach_screenshot(cart_page, "cart_page_state")
+
     with allure.step("Click checkout button"):
         cart_page.click_checkout()
 
@@ -90,13 +109,15 @@ def test_checkout_without_first_name(inventory_page, cart_page, checkout_page):
             EMPTY_CHECKOUT_FIRSTNAME["postcode"]
         )
 
-        checkout_page.screenshot("error message when checkout without firstname")
-
     with allure.step("Verify error message is displayed"):
         expect(checkout_page.error_message).to_be_visible()
         expect(checkout_page.error_message).to_contain_text(
             "First Name is required"
         )
+
+    with allure.step("Capture checkout page verified state"):
+        attach_current_url(checkout_page)
+        attach_screenshot(checkout_page, "checkout_page_verified")
 
 
 @allure.feature("Checkout UI")
@@ -113,6 +134,10 @@ def test_checkout_without_first_name(inventory_page, cart_page, checkout_page):
     with allure.step("Go to cart page"):
         inventory_page.go_to_cart()
 
+    with allure.step("Capture cart page state"):
+        attach_current_url(cart_page)
+        attach_screenshot(cart_page, "cart_page_state")
+
     with allure.step("Click checkout button"):
         cart_page.click_checkout()
 
@@ -123,13 +148,15 @@ def test_checkout_without_first_name(inventory_page, cart_page, checkout_page):
             EMPTY_CHECKOUT_LASTNAME["postcode"]
         )
 
-        checkout_page.screenshot("error message when checkout without lastname")
-
     with allure.step("Verify error message is displayed"):
         expect(checkout_page.error_message).to_be_visible()
         expect(checkout_page.error_message).to_contain_text(
             "Last Name is required"
         )
+
+    with allure.step("Capture checkout page verified state"):
+        attach_current_url(checkout_page)
+        attach_screenshot(checkout_page, "checkout_page_verified")
 
 
 

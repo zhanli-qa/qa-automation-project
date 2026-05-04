@@ -1,19 +1,12 @@
-import allure
+
 class BasePage:
 
     def __init__(self, page):
         self.page = page
 
-    def screenshot(self, name="screenshot"):
-        screenshot = self.page.screenshot(full_page=True)
+    def screenshot(self):
 
-        allure.attach(
-            screenshot,
-            name=name,
-            attachment_type=allure.attachment_type.PNG
-        )
-
-        return screenshot
+        return self.page.screenshot(full_page=True)
 
     def click(self, locator):
         locator.click()

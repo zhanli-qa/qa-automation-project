@@ -1,5 +1,6 @@
 import allure
 from playwright.sync_api import expect
+from common.utils.allure_helper import attach_screenshot, attach_current_url
 
 @allure.feature("Cart UI")
 @allure.story("Cart page display added product")
@@ -19,13 +20,18 @@ def test_cart_page_display_added_product(inventory_page, cart_page):
     with allure.step("Go to cart page"):
         inventory_page.go_to_cart()
 
+    with allure.step("Capture cart page state"):
+        attach_current_url(cart_page)
+        attach_screenshot(cart_page, "cart_page_after_add_product")
+
     with allure.step("Verify the first product displayed on cart page"):
         expect(cart_page.cart_badge).to_have_text("1")
         expect(cart_page.get_product_by_name(product_name)).to_be_visible()
         expect(cart_page.remove_button).to_be_visible()
 
-        # allure attach
-        cart_page.screenshot("added_product_displayed_in_cart_page")
+    with allure.step("Capture verified cart state"):
+        attach_current_url(cart_page)
+        attach_screenshot(cart_page, "cart_page_verified")
 
 
 @allure.feature("Cart UI")
@@ -45,6 +51,10 @@ def test_remove_product_from_cart_page(inventory_page, cart_page):
     with allure.step("Go to cart page"):
         inventory_page.go_to_cart()
 
+    with allure.step("Capture cart page state"):
+        attach_current_url(cart_page)
+        attach_screenshot(cart_page, "cart_page_after_add_product")
+
     with allure.step("Verify the first product displayed on cart page"):
         expect(cart_page.remove_button).to_be_visible()
         expect(cart_page.get_product_by_name(product_name)).to_be_visible()
@@ -58,8 +68,9 @@ def test_remove_product_from_cart_page(inventory_page, cart_page):
         expect(cart_page.get_product_by_name(product_name)).not_to_be_visible()
         expect(cart_page.cart_badge).not_to_be_visible()
 
-        # allure attach
-        cart_page.screenshot("product_removed_from_cart_page")
+    with allure.step("Capture verified cart state"):
+        attach_current_url(cart_page)
+        attach_screenshot(cart_page, "cart_page_verified")
 
 @allure.feature("Cart UI")
 @allure.story("Continue shopping from cart page")
@@ -71,6 +82,10 @@ def test_continue_shopping_from_cart_page(inventory_page, cart_page):
     with allure.step("Go to cart page"):
         inventory_page.go_to_cart()
 
+    with allure.step("Capture cart page state"):
+        attach_current_url(cart_page)
+        attach_screenshot(cart_page, "cart_page_state")
+
     with allure.step("Click continue shopping button"):
         cart_page.click_continue_shopping()
 
@@ -80,8 +95,9 @@ def test_continue_shopping_from_cart_page(inventory_page, cart_page):
             expect(inventory_page.get_product_name_locator(product)).to_be_visible()
             expect(inventory_page.get_product_name_locator(product)).to_be_visible()
 
-        # allure attach
-        cart_page.screenshot("continue_shopping_from_cart_page")
+    with allure.step("Capture verified cart state"):
+        attach_current_url(cart_page)
+        attach_screenshot(cart_page, "cart_page_verified")
 
 
 @allure.feature("Cart UI")
@@ -97,6 +113,10 @@ def test_checkout_from_cart_page(inventory_page, cart_page, checkout_page):
     with allure.step("Go to cart page"):
         inventory_page.go_to_cart()
 
+    with allure.step("Capture cart page state"):
+        attach_current_url(cart_page)
+        attach_screenshot(cart_page, "cart_page_after_add_product")
+
     with allure.step("Click checkout button on cart page"):
         cart_page.click_checkout()
 
@@ -106,8 +126,9 @@ def test_checkout_from_cart_page(inventory_page, cart_page, checkout_page):
         expect(checkout_page.postcode_input).to_be_visible()
         expect(checkout_page.cancel_button).to_be_visible()
 
-        # allure attach
-        cart_page.screenshot("checkout_from_cart_page")
+    with allure.step("Capture verified cart state"):
+        attach_current_url(cart_page)
+        attach_screenshot(cart_page, "cart_page_verified")
 
 
 

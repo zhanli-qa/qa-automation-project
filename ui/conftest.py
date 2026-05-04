@@ -10,7 +10,7 @@ from ui.pages.checkout_complete_page import CheckoutCompletePage
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item):
     """
-    # auto screenshot only when the test failed
+    # auto screenshot and URL only when the test failed
     """
     outcome = yield
     report = outcome.get_result()
@@ -20,9 +20,16 @@ def pytest_runtest_makereport(item):
 
         if page is not None:
 
+            # URL (convert to HTML format)
+            allure.attach(
+                f"<a href='{page.url}'>{page.url}</a>",
+                name="current_url",
+                attachment_type=allure.attachment_type.HTML
+            )
+            # screenshot
             allure.attach(
                 page.screenshot(full_page=True),
-                name=f"failure_{item.name}",
+                name="failure_screenshot",
                 attachment_type=allure.attachment_type.PNG
             )
 

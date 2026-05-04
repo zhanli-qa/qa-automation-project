@@ -39,3 +39,27 @@ def attach_status_code(response):
         name="status_code",
         attachment_type=allure.attachment_type.TEXT
     )
+
+
+def attach_screenshot(page_obj, name="screenshot"):
+    """
+    Attach current page URL to Allure report.
+    """
+    screenshot = page_obj.screenshot()
+
+    allure.attach(
+        screenshot,
+        name=name,
+        attachment_type=allure.attachment_type.PNG
+    )
+
+
+def attach_current_url(page_obj, name="current_url"):
+    """
+    Attach current page screenshot to Allure report.
+    """
+    allure.attach(
+        page_obj.page.url,
+        name=name,
+        attachment_type=allure.attachment_type.TEXT
+    )
