@@ -3,7 +3,7 @@ from playwright.sync_api import expect
 from test_data.ui.checkout import VALID_CHECKOUT_INFO
 from common.utils.allure_helper import attach_screenshot, attach_current_url
 
-@allure.feature("Finish UI")
+@allure.feature("Checkout complete UI")
 @allure.story("Checkout complete displayed")
 def test_checkout_completely(inventory_page, cart_page, checkout_page, checkout_overview_page, checkout_complete_page):
 

@@ -3,7 +3,7 @@ import pytest
 from playwright.sync_api import expect
 
 
-@allure.mark.skip(reason="Template only: SauceDemo does not support token-based cookie login")
+@pytest.mark.skip(reason="Template only: SauceDemo does not support token-based cookie login")
 @allure.feature("API+UI Integration")
 @allure.story("API login then skip UI login by setting browser cookie")
 def test_api_login_then_skip_ui_login(page, api_client):
