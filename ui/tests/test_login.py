@@ -21,7 +21,7 @@ def test_login_success(login_page):
         attach_screenshot(inventory_page, "after_success_login")
 
     with allure.step("Verify user redirect to inventory page"):
-        expect(inventory_page.title).to_have_text("Wrong text")
+        expect(inventory_page.title).to_have_text("Products")
 
 
 # Negative case: Verify login failed with invalid username
