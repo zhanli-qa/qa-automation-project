@@ -126,6 +126,22 @@ Enables fast root cause analysis without re-running tests.
 UI tests include both manual and automatic screenshot capture strategies to ensure full visibility of test execution and failures
 
 
+## API + UI Integration Testing
+
+This project also demonstrates API and UI integration testing.
+
+Instead of preparing test data through slow UI steps, APIs are used to create or prepare test data first. Then the UI test verifies the user-facing behavior.
+
+Example strategy:
+
+- Use API to prepare test data
+- Use UI to verify business flow
+- Reduce UI dependency
+- Improve test speed and stability
+
+In real enterprise projects, API-based login can also be used to obtain an authentication token and inject it into the browser context to skip repetitive UI login steps.
+
+
 Run tests and generate report:
 
     pytest --alluredir=reports/ --clean-alluredir
