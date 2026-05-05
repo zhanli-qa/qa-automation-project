@@ -18,8 +18,13 @@ class CheckoutPage(BasePage):
         self.fill(self.firstname_input, firstname)
         self.fill(self.lastname_input, lastname)
         self.fill(self.postcode_input, postcode)
+
         self.click(self.continue_button)
-        return CheckoutOverviewPage(self.page)
+
+        if self.error_message.is_visible():
+            return self
+        else:
+            return CheckoutOverviewPage(self.page)
 
 
 
