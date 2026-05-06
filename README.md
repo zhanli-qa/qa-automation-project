@@ -241,4 +241,9 @@ Install dependencies:
 pytest --alluredir=allure-results --clean-alluredir && allure serve allure-results
 ```
 
+## 👤 Author
+
+Designed and built by Zhanli Hou, as part of a personal initiative to develop a scalable QA automation framework covering API and UI testing.
+
+
 ---
