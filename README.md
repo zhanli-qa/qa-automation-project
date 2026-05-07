@@ -8,7 +8,7 @@
 A scalable end-to-end QA automation framework covering API testing, UI testing, and API + UI integration, built with Python, Pytest, Requests, Playwright, and Allure.
 ---
 
-## 🚀 Tech Stack
+## Tech Stack
 
 - Python
 - Pytest
@@ -19,7 +19,7 @@ A scalable end-to-end QA automation framework covering API testing, UI testing, 
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
     api/
     ├── client/          # API client (request handling, auth, headers)
@@ -54,21 +54,21 @@ A scalable end-to-end QA automation framework covering API testing, UI testing, 
 
 ---
 
-## ✨ Features
+## Features
 
-- 🔹 API Client abstraction with reusable request methods  
-- 🔹 Service layer for clean test logic separation  
-- 🔹 JSON schema validation for response verification  
-- 🔹 Positive & negative test coverage  
-- 🔹 Allure reporting with:
+- API Client abstraction with reusable request methods  
+- Service layer for clean test logic separation  
+- JSON schema validation for response verification  
+- Positive & negative test coverage  
+- Allure reporting with:
   - Step-level execution
   - Feature / Story categorization
   - Request & response attachments
-- 🔹 Centralized logging
-- 🔹 UI automation with Playwright (POM design)
-- 🔹 Automatic failure debugging (screenshot + URL)
+- Centralized logging
+- UI automation with Playwright (POM design)
+- Automatic failure debugging (screenshot + URL)
 
-## 🧠 Design Highlights
+## Design Highlights
 
 - Layered architecture across API and UI
   - API: client → service → test layer  
@@ -93,28 +93,28 @@ A scalable end-to-end QA automation framework covering API testing, UI testing, 
 
 ---
 
-## 📊 Allure Report (Test Execution & Debugging)
+## Allure Report (Test Execution & Debugging)
 
 The project integrates Allure reporting to provide clear visibility into test execution and simplify debugging.
 
-### 🔹 Test Overview
+### Test Overview
 ![Overview](docs/allure-report/overview.png)
 
-### 🔹 Test Steps
+### Test Steps
 ![Steps](docs/allure-report/test-step.png)
 
-### 🔹 Request / Response Attachments
+### Request / Response Attachments
 ![Attachments](docs/allure-report/attachments.png)
 
-### 🔹 UI Debugging (Screenshot & URL)
+### UI Debugging (Screenshot & URL)
 ![UI Screenshot](docs/allure-report/ui-screenshot.png)
 
-### 🔹 Failure Debugging
+### Failure Debugging
 ![Failure](docs/allure-report/ui-failure.png)
 
 ---
 
-### 🔍 Key Capabilities
+### Key Capabilities
 
 - Step-level execution tracking  
 - API request & response visibility  
@@ -140,9 +140,9 @@ Example strategy:
 
 In real enterprise projects, API-based login can also be used to obtain an authentication token and inject it into the browser context to skip repetitive UI login steps.
 
-## ⚙️ Test Configuration
+## Test Configuration
 
-This project uses `pytest.ini` to centralize test configuration and enable flexible test execution.
+This project uses `pytest.ini` to centralize test configuration and enable flexible test execution and show logging.
 
 ```ini
 [pytest]
@@ -157,6 +157,13 @@ markers =
     ui: UI tests
     smoke: Smoke tests
     regression: Regression tests
+    
+# logging
+log_cli = true
+log_cli_level = INFO
+log_cli_format = %(asctime)s - %(name)s - %(levelname)s - %(message)s
+log_cli_date_format = %Y-%m-%d %H:%M:%S
+
 ```
 
 This configuration allows:
@@ -167,7 +174,7 @@ This configuration allows:
 
 ---
 
-## 🚀 Run Tests and Generate Allure Report
+## Run Tests and Generate Allure Report
 
 ### Run all tests
 
@@ -189,7 +196,7 @@ pytest -m ui --alluredir=allure-results --clean-alluredir
 
 ---
 
-## 📊 View Allure Report
+## View Allure Report
 
 ### Generate and open report (recommended)
 
@@ -206,44 +213,99 @@ allure open allure-report
 
 ---
 
-## 🧪 Test Strategy
+## Test Strategy
 
-* **API Tests** → validate backend logic, schema, and error handling
-* **UI Tests** → validate user flows and UI behavior using Playwright
-* **Markers** → enable test categorization (`api`, `ui`, `smoke`, `regression`)
-* **Allure Reporting** → provide detailed execution steps, logs, and screenshots
+This project follows a layered test strategy combining API and UI automation:
 
-This setup is designed to support:
+- API Testing
+  - Implemented using `pytest` + `requests`
+  - Validates endpoints, status codes, and response schemas
+  - JSON schema validation ensures contract consistency
 
-* Smoke tests on every commit
-* Regression tests on scheduled runs
-* Scalable test execution in CI pipelines
+- UI Testing
+  - Built with `Playwright` using Page Object Model (POM)
+  - Covers critical user flows: login, product browsing, cart, checkout
+
+- Integration Testing
+  - Combines API + UI to simulate real user scenarios
+
+- Test Execution
+  - Local execution via `pytest`
+  - CI-ready structure for future integration
+
+- Reporting
+  - Allure reports for visualization
+  - Logging for debugging and traceability
+
+## Risk Analysis
+
+Test coverage is prioritized based on feature risk:
+
+- High Risk
+  - Authentication (login/logout)
+  - Checkout flow (business-critical path)
+  - API endpoints with data mutation (POST/PUT/DELETE)
+
+- Medium Risk
+  - Product listing and filtering
+  - Cart operations
+
+- Low Risk
+  - Static UI elements (layout, styling)
+
+High-risk areas are covered with:
+- More automated test cases
+- Regression coverage
+- Additional validation and logging
 
 
-Report provides:
+## Test Data Strategy
 
-- Step-level execution visibility  
-- Full request & response data for debugging  
-- Structured test grouping (Feature / Story)  
-- Clear failure diagnostics 
+Test data is managed separately from test logic for maintainability and reuse:
+
+- API test data stored in structured JSON files
+- UI test data managed in Python modules (e.g., user credentials)
+- Clear separation between test logic and test data
+
+Key principles:
+- Avoid hardcoded values inside test cases
+- Reuse common test data across multiple tests
+- Use dynamic or unique data where necessary to prevent conflicts
+
+
+## Data Cleanup Strategy
+
+To ensure test stability and avoid data pollution:
+
+- Tests are designed to be **independent and isolated**
+- Avoid dependency between test cases
+- Use temporary or disposable test data where possible
+
+Where applicable:
+- Cleanup can be performed via API (e.g., deleting created resources)
+- Tests do not rely on pre-existing system state
+
+This approach helps reduce flaky tests and improves reliability in CI environments
 
 ---
 
-## ▶️ How to Run
+## How to Run
 
 Install dependencies:
 
     pip install -r requirements.txt
 
-## ⚡ One Command (Run + Report)
+## One Command (Run + Report)
 
 ```bash
 pytest --alluredir=allure-results --clean-alluredir && allure serve allure-results
 ```
 
-## 👤 Author
+## Author
 
 Designed and built by Zhanli Hou, as part of a personal initiative to develop a scalable QA automation framework covering API and UI testing.
 
+## Env
+cp .env.example .env
 
 ---

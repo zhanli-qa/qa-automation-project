@@ -1,10 +1,14 @@
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 """
 config Environments:Dev & Staging
 """
 class config:
 
+    # Find ENV as current environment, if not, dev is by default
     ENV = os.getenv("ENV", "dev")
 
     # API URLs

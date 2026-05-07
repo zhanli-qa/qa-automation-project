@@ -10,7 +10,7 @@ from ui.pages.checkout_complete_page import CheckoutCompletePage
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item):
     """
-    # auto screenshot and URL only when the test failed
+    # auto screenshot and URL when the test failed only
     """
     outcome = yield
     report = outcome.get_result()

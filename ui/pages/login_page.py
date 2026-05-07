@@ -1,6 +1,9 @@
 from ui.pages.inventory_page import InventoryPage
 from ui.pages.base_page import BasePage
 from common.config.config import config
+from common.logger.logger import get_logger
+
+logger = get_logger()
 class LoginPage(BasePage):
 
     def __init__(self, page):
@@ -13,9 +16,17 @@ class LoginPage(BasePage):
         self.error_message = page.locator('[data-test="error"]')
 
     def login(self, username, password):
+        logger.info("Start Login")
+
         self.fill(self.username_input, username)
+        logger.info(f"Filled username: {username}")
+
         self.fill(self.password_input, password)
+        logger.info("Filled password")
+
         self.click(self.login_button)
+        logger.info("Clicked login button")
+
         return InventoryPage(self.page)
 
     def open(self):

@@ -1,4 +1,6 @@
+from common.logger.logger import get_logger
 
+logger = get_logger()
 class BasePage:
 
     def __init__(self, page):
@@ -9,6 +11,7 @@ class BasePage:
         return self.page.screenshot(full_page=True)
 
     def click(self, locator):
+        logger.info(f"Click element: {locator}")
         locator.click()
 
     def fill(self, locator, text):

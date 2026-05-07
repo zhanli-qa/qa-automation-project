@@ -2,7 +2,7 @@ import allure
 import pytest
 from playwright.sync_api import expect
 
-pytestmark = pytest.mark.ui
+pytestmark = pytest.mark.integration
 
 
 @pytest.mark.skip(reason="Template only: SauceDemo does not support token-based cookie login")
