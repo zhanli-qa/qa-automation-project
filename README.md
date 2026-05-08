@@ -2,6 +2,7 @@
 ![Python](https://img.shields.io/badge/Python-3.x-green)
 ![Pytest](https://img.shields.io/badge/Pytest-Framework-yellow)
 ![Allure](https://img.shields.io/badge/Report-Allure-orange)
+![QA Automation CI](https://github.com/https://github.com/zhanli-qa/qa-automation-project/qa-automation-project/actions/workflows/ci.yml/badge.svg)
 
 # QA Automation Project
 
@@ -284,6 +285,33 @@ Where applicable:
 - Tests do not rely on pre-existing system state
 
 This approach helps reduce flaky tests and improves reliability in CI environments
+
+
+## 📌 Engineering Practices
+
+- [Flaky Test Strategy](docs/flaky-test-strategy.md)
+
+## ⚙️ CI/CD Integration
+
+This project is integrated with GitHub Actions CI.
+
+The CI pipeline is triggered automatically on:
+
+- Push to the `main` branch
+- Pull request to the `main` branch
+- Manual workflow execution
+
+The pipeline performs the following steps:
+
+1. Checks out the source code
+2. Sets up the Python environment
+3. Installs project dependencies
+4. Runs API automation tests
+5. Installs Playwright browsers
+6. Runs UI automation tests
+7. Uploads Allure test results as GitHub Actions artifacts
+
+This lightweight CI setup simulates a real-world automation testing pipeline and helps ensure that API and UI regression tests are executed consistently after code changes.
 
 ---
 
