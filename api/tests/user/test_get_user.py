@@ -17,6 +17,7 @@ Verify all users can be retrieved successfully
 Return 200 with Json format, and validate user list schema
 '''
 
+@pytest.mark.smoke
 @allure.feature("User API")
 @allure.story("Get all users")
 def test_get_all_users(user_service):

@@ -11,6 +11,8 @@ pytestmark = pytest.mark.api
 Test login function
 Verity if return token
 '''
+
+@pytest.mark.external
 @allure.feature("Auth API")
 @allure.story("Login")
 def test_login(api_client):
