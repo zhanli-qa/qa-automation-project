@@ -2,7 +2,7 @@
 ![Python](https://img.shields.io/badge/Python-3.x-green)
 ![Pytest](https://img.shields.io/badge/Pytest-Framework-yellow)
 ![Allure](https://img.shields.io/badge/Report-Allure-orange)
-![QA Automation CI](https://github.com/https://github.com/zhanli-qa/qa-automation-project/qa-automation-project/actions/workflows/ci.yml/badge.svg)
+[![QA Automation CI](https://github.com/zhanli-qa/qa-automation-project/actions/workflows/ci.yml/badge.svg)](https://github.com/zhanli-qa/qa-automation-project/actions/workflows/ci.yml)
 
 # QA Automation Project
 
