@@ -2,12 +2,20 @@
 ![Python](https://img.shields.io/badge/Python-3.x-green)
 ![Pytest](https://img.shields.io/badge/Pytest-Framework-yellow)
 ![Allure](https://img.shields.io/badge/Report-Allure-orange)
-[![QA Automation CI](https://github.com/zhanli-qa/qa-automation-project/actions/workflows/ci.yml/badge.svg)](https://github.com/zhanli-qa/qa-automation-project/actions/workflows/ci.yml)
+![QA Automation CI](https://github.com/https://github.com/zhanli-qa/qa-automation-project/qa-automation-project/actions/workflows/ci.yml/badge.svg)
 
 # QA Automation Project
 
 A scalable end-to-end QA automation framework covering API testing, UI testing, and API + UI integration, built with Python, Pytest, Requests, Playwright, and Allure.
 ---
+
+## 🚀 Highlights
+
+- Built an end-to-end QA automation framework from scratch
+- Covered API testing, UI testing, and API + UI integration testing
+- Designed with layered architecture and Page Object Model
+- Integrated Allure reporting with screenshots and request/response attachments
+- Integrated GitHub Actions CI for automated regression execution
 
 ## 🚀 Tech Stack
 
@@ -19,7 +27,6 @@ A scalable end-to-end QA automation framework covering API testing, UI testing, 
 - Playwright (UI Automation with POM)
 
 ---
-
 ## 📁 Project Structure
 
     api/
@@ -134,12 +141,12 @@ Instead of preparing test data through slow UI steps, APIs are used to create or
 
 Example strategy:
 
-- Use API to prepare test data
-- Use UI to verify business flow
-- Reduce UI dependency
-- Improve test speed and stability
+1. Use API to create or prepare test data
+2. Open the UI with Playwright
+3. Verify that the prepared data is displayed correctly
+4. Complete the user flow through UI
+5. Validate the final result through API or UI assertion
 
-In real enterprise projects, API-based login can also be used to obtain an authentication token and inject it into the browser context to skip repetitive UI login steps.
 
 ## ⚙️ Test Configuration
 
@@ -172,45 +179,6 @@ This configuration allows:
 * Separation of API and UI tests
 * Selective test execution using markers
 * Better scalability and CI/CD integration
-
----
-
-## 🚀 Run Tests and Generate Allure Report
-
-### Run all tests
-
-```bash
-pytest --alluredir=allure-results --clean-alluredir
-```
-
-### Run only API tests
-
-```bash
-pytest -m api --alluredir=allure-results --clean-alluredir
-```
-
-### Run only UI tests
-
-```bash
-pytest -m ui --alluredir=allure-results --clean-alluredir
-```
-
----
-
-## 📊 View Allure Report
-
-### Generate and open report (recommended)
-
-```bash
-allure serve allure-results
-```
-
-### Generate report without rerunning tests
-
-```bash
-allure generate allure-results -o allure-report --clean
-allure open allure-report
-```
 
 ---
 
@@ -315,23 +283,152 @@ This lightweight CI setup simulates a real-world automation testing pipeline and
 
 ---
 
-## ▶️ How to Run
+## 👤 Author
 
-Install dependencies:
+Designed and built by Zhanli Hou, as part of a personal initiative to develop a scalable QA automation framework covering API and UI testing.
 
-    pip install -r requirements.txt
+## ▶️ How to Run Locally
 
-## ⚡ One Command (Run + Report)
+Follow the steps below to set up the project and run the automation tests locally.
+
+---
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/zhanli-qa/qa-automation-project.git
+cd qa-automation-project
+```
+
+---
+
+### 2. Create a virtual environment
+
+```bash
+python -m venv .venv
+```
+
+Activate the virtual environment.
+
+For Windows:
+
+```bash
+.venv\Scripts\activate
+```
+
+For Mac / Linux:
+
+```bash
+source .venv/bin/activate
+```
+
+---
+
+### 3. Install project dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+### 4. Install Playwright browsers
+
+```bash
+playwright install
+```
+
+---
+
+### 5. Configure environment variables
+
+Create a local `.env` file from the example file:
+
+```bash
+cp .env.example .env
+```
+
+The `.env` file is used for environment-specific configuration, such as base URLs or runtime settings.
+
+> Note: `.env` should not be committed to GitHub. Only `.env.example` should be committed as a template.
+
+---
+
+## 🧪 Run Tests
+
+### Run all tests
+
+```bash
+pytest --alluredir=allure-results --clean-alluredir
+```
+
+---
+
+### Run only API tests
+
+```bash
+pytest -m api --alluredir=allure-results --clean-alluredir
+```
+
+---
+
+### Run only UI tests
+
+```bash
+pytest -m ui --alluredir=allure-results --clean-alluredir
+```
+
+---
+
+### Run smoke tests
+
+```bash
+pytest -m smoke --alluredir=allure-results --clean-alluredir
+```
+
+---
+
+### Run regression tests
+
+```bash
+pytest -m regression --alluredir=allure-results --clean-alluredir
+```
+
+---
+
+## 📊 Generate and View Allure Report
+
+### Option 1: Generate and open report directly
+
+```bash
+allure serve allure-results
+```
+
+---
+
+### Option 2: Generate static report and open it
+
+```bash
+allure generate allure-results -o allure-report --clean
+allure open allure-report
+```
+
+---
+
+## ⚡ One Command: Run Tests and Open Allure Report
 
 ```bash
 pytest --alluredir=allure-results --clean-alluredir && allure serve allure-results
 ```
 
-## 👤 Author
-
-Designed and built by Zhanli Hou, as part of a personal initiative to develop a scalable QA automation framework covering API and UI testing.
-
-## Env
-cp .env.example .env
-
 ---
+
+## 📌 Notes
+
+- `allure-results/` contains raw test execution results.
+- `allure-report/` contains the generated HTML report.
+- `reports/`, `allure-results/`, and `allure-report/` should usually be ignored by Git.
+- Playwright browser installation is required before running UI tests.
+- Environment variables should be configured through `.env`, while `.env.example` is used as a safe template for GitHub.
+
+
